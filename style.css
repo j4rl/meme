@@ -1,0 +1,441 @@
+:root {
+    color-scheme: dark;
+    font-synthesis: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    color: #f7f7f9;
+}
+
+/* Fullscreen viewer page */
+body.viewer-page {
+    background: #050608;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.viewer {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 20% 20%, rgba(31, 33, 46, 0.9), #050608 70%);
+    padding: clamp(8px, 1vw, 24px);
+}
+
+.viewer img {
+    padding:1rem;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 18px;
+    background: #050608;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+}
+
+.viewer .empty {
+    text-align: center;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
+/* Upload page */
+body.upload-page {
+    background: radial-gradient(circle at top, #141627, #070910 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(24px, 6vw, 72px);
+}
+
+body.files-page {
+    background: radial-gradient(circle at 10% 10%, #1b1f3a, #070910 80%);
+    display: block;
+    min-height: 100vh;
+    overflow-y: visible;
+    padding: clamp(24px, 6vw, 72px);
+}
+
+.panel {
+    width: min(640px, 100%);
+    background: rgba(10, 12, 20, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: clamp(24px, 4vw, 40px);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(10px);
+}
+
+.file-panel {
+    width: min(1080px, 100%);
+    margin: clamp(24px, 4vh, 56px) auto 0;
+}
+
+.panel h1 {
+    margin: 0 0 6px;
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
+}
+
+.panel p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.upload-form {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.field-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.file-drop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 24px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+    min-height: 150px;
+}
+
+.file-drop:hover {
+    border-color: #ffd643;
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.file-drop.dragover {
+    border-color: #ffd643;
+    background: rgba(255, 214, 67, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(255, 214, 67, 0.4);
+}
+
+.file-drop svg {
+    width: 48px;
+    height: 48px;
+    fill: rgba(255, 255, 255, 0.85);
+}
+
+.file-drop .file-drop-text {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.file-drop .file-name {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+input[type="number"],
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: inherit;
+    font-size: 1rem;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #ffd643;
+    box-shadow: 0 0 0 3px rgba(255, 214, 67, 0.2);
+}
+
+.checkbox-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+}
+
+.checkbox-row input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #ffd643;
+}
+
+.checkbox-row span {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+button {
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    background: linear-gradient(120deg, #ffd643, #ffac3c);
+    color: #1b1200;
+    cursor: pointer;
+    transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(255, 214, 67, 0.35);
+}
+
+.messages {
+    margin-top: 20px;
+    display: grid;
+    gap: 10px;
+}
+
+.messages .alert {
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+}
+
+.panel-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.alert.success {
+    background: rgba(72, 187, 120, 0.18);
+    border: 1px solid rgba(72, 187, 120, 0.4);
+    color: #aef5d0;
+}
+
+.alert.error {
+    background: rgba(245, 101, 101, 0.2);
+    border: 1px solid rgba(245, 101, 101, 0.4);
+    color: #ffd4d4;
+}
+
+.links {
+    margin-top: 26px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 18px;
+}
+
+.links a {
+    color: #ffd643;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-user {
+    color: rgba(255, 255, 255, 0.72);
+    font-weight: 600;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.file-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.file-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+    transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    position: relative;
+}
+
+.file-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+}
+
+.file-card.expiring {
+    border-color: rgba(255, 86, 86, 0.6);
+    box-shadow: 0 0 0 1px rgba(255, 86, 86, 0.4);
+}
+
+.file-preview {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.file-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.file-select {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(7, 9, 16, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.file-select input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.file-select .checkbox {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    transition: background 140ms ease, border-color 140ms ease;
+}
+
+.file-select input:checked + .checkbox {
+    background: #ffd643;
+    border-color: #ffd643;
+    box-shadow: 0 0 6px rgba(255, 214, 67, 0.7);
+}
+
+.file-select:hover {
+    border-color: #ffd643;
+    box-shadow: 0 0 0 2px rgba(255, 214, 67, 0.2);
+}
+
+.file-meta {
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.file-name {
+    font-weight: 600;
+    font-size: 1rem;
+    word-break: break-all;
+}
+
+.file-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 214, 67, 0.2);
+    color: #ffd643;
+    font-weight: 600;
+    font-size: 0.85rem;
+    width: max-content;
+}
+
+.file-actions {
+    padding: 0 18px 18px;
+}
+
+.danger-button {
+    width: 100%;
+    background: rgba(245, 101, 101, 0.9);
+    color: #fff;
+}
+
+.danger-button:hover {
+    box-shadow: 0 15px 30px rgba(245, 101, 101, 0.4);
+}
+
+.danger-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.bulk-actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bulk-actions .danger-button {
+    width: auto;
+    min-width: 180px;
+}
+
+.empty-files {
+    margin-top: 40px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.empty-files a {
+    color: #ffd643;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.empty-files a:hover {
+    text-decoration: underline;
+}

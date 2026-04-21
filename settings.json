@@ -1,0 +1,5 @@
+{
+    "interval": 20,
+    "expire_days": 300,
+    "randomize_order": false
+}
